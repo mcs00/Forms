@@ -14,19 +14,33 @@
           ["13459985K","Lucas","Campos Perez","650878349","pcp@gmail.com","12/12/2000","ES9482048209593","BEG"],
           ["13948284O","Juan","Campos Perez","650878349","pcp@gmail.com","12/12/2000","ES9482048209593","BEG"],
       ];
+      function createListPlayers(pJugadores, pContenedor, pTipo){
+        pContenedor.innerHTML="<h3>Lista de jugadores</h3>";
+        for(let i=0;i<pJugadores.lenght;i++){
+          let jugador = pJugadores[i];
+          if(pTipo==jugador[7])
+            pContenedor.innerHTML+="<p>" + players[0] + "</p>";
+        }
+      }
       window.onload=function(){
         console.log("Cargado correctamente");
         //alert("Cargado correctamente");
-        //Interpreta los jugadores y los saca por pantalla
-        let containerPlayers= document.getelementbyID('c_players');
+        //Interpreta los jugadores y los saca por pantalla (div contenedor de los jugadores)
+        let containerPlayers=document.getElementById('c_players');
+        //Llama a la funcion para begginers
+        createListPlayers(players, containerPlayers, "BEG" );
+        //lista 2
+        let containerPlayersPro = document.getElementById('c_players_pro');
+        createListPlayers(players, containerPlayersPro, "PRO");
 
 
-      };
+      }
+
       </script>
   </head>
   <body>
     <div id="c_players">
-    </div>
+    <div id="c_players">
 
   </body>
 </html>
