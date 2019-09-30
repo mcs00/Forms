@@ -15,43 +15,53 @@
             ["43121297U", "Alex", "Fernandez", "682434349", "afernandez@gmail.com", "14-01-2007", "ES6621000418401234567895", "BEG"]
         ];
 
+        function isValidPlayer(pMinAnys){
+            let dataNai = document.getElementById(fecha);
+            let aDate = dataNai.split("/"); //array dia mes año
+            let bornDate = new Date(aDate[2], aDate[1]-1, aDate[0]);
+            let currentDate = new Date();
+            let age = diffAnys(currentDate, bornDate);
+            return (age>=pMinAnys);
+        }
         function createListPlayers(pJugadores, pContenedor, pTipo) {
 
             pContenedor.innerHTML = "<h3>Lista de jugadores</h3>";
             for (let i = 0; i < pJugadores.length; i++) {
                 let jugador = pJugadores[i];
                 if (pTipo == jugador[7]) {
-                    pContenedor.innerHTML += "<p>" + jugador[0] + " //" + jugador[1] + "<span>" + " " + jugador[2] + "</span>" + " //" + jugador[3] + " //" + jugador[4] + " //" + jugador[5] + " //" + jugador[6] + "//" + jugador[7] + "</p>";
+                    pContenedor.innerHTML += "<p>" + jugador[0] + "//" + jugador[1] + "<span>" + "" + jugador[2] + "</span>" + "//" + jugador[3] + " //" + jugador[4] + " //" + jugador[5] + " //" + jugador[6] + "//" + jugador[7] + "</p>";
                 }
             }
         }
 
         function checkForm() {
-            alert("Comprobar Datos");
             let test_dni = document.getElementById("dni");
             let test_nombre = document.getElementById("nombre");
             let test_apellidos = document.getElementById("apellidos");
             let test_telefono = document.getElementById("telefono");
             let test_fecha = document.getElementById("fecha");
+            alert(test_dni);
 
-            let txtTel=camp_telefono.value;
-            let txtDate=camp_telefono.value;
+           let txtTel=test_telefono.value;
+           //let txtDate=test_telefono.value;
 
             if( !validaTelefon(txtTel) || txtTel==""){
                 alert("Telefono incorrecto");
                 return false;
             }
+
+            if (test_dni.value != "" && test_nombre.value !== "" && test_apellidos.value != "") {
+                players.push([test_dni.value, test_nombre.value, test_apellidos.value, "", "", "", "BEG"]);
+                let containerPlayers = document.getElementById("c_players");
+                createListPlayers(players, containerPlayers, "BEG");
+                alert("Datos insertados correctamente")
+                //añadir al array(nuevo jugador)
+            } else {
+                alert("Todos los campos son obligatorios");
+            }
+
         }
 
-        if (test_dni.value != "" && test_nombre.value != "" && test_apellidos.value != "") {
-            players.push([test_dni.value, test_nombre.value, test_apellidos.value, "", "", "", "BEG"]);
-            let containerPlayers = document.getElementById("c_players");
-            createListPlayers(players, containerPlayers, "BEG")
-            alert("Datos insertados correctamente")
-            //añadir al array(nuevo jugador)
-        } else {
-            alert("Todos los campos son obligatorios");
-        }
 
 
         window.onload = function () {
@@ -74,7 +84,7 @@
 <form class="" action="index.html" method="post">
     <p>
         <label>DNI:</label>
-        <input type="text" id="dni" name="dni" value="">
+        <input type="text" id="dni" name="dni"  value="">
     </p>
     <p>
         <label>Nombre:</label>
@@ -90,12 +100,10 @@
     </p>
     <p>
         <label>Fecha:</label>
-        <input type="text" id="fecha" name="fecha" value="">
+        <input type="text" id="fecha" name="fecha"  value="">
     </p>
     <button type="button" id="bt-enviar" name="button" onclick="checkForm()">Añadir Jugador</button>
 </form>
-
-
 <div id="c_players"></div>
 <div id="c_players_pro"></div>
 </body>
