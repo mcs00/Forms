@@ -1,3 +1,12 @@
 .container{
-  background-color: black
+  background-color: lightgrey;
+}
+
+.fields{
+  background-color: lightblue;
+  border-style: groove;
+  border-radius: 3px;
+}
+.logoimg{
+
 }

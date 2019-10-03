@@ -2,17 +2,18 @@
 <html lang="es" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Players</title>
+    <link rel="stylesheet" href="css/style.css" media="screen" title="no title">
     <script type="text/javascript" src="js/util.js"></script>
     <script type="text/javascript" src="js/validation.js"></script>
     <script type="text/javascript">
 
         let players = [
-            ["43121297F", "Bufalobil", "Perez Gomez", "682454545", "jperez@gmail.com", "12-12-1980", "ES6621000418401234567891", "PRO"],
-            ["43121297D", "Kiko", "Sastre Peña", "682434343", "ksastre@gmail.com", "14-12-1990", "ES6621000418401234567892", "PRO"],
-            ["43121297R", "Miguel", "Cañellas", "682434344", "mcañellas@gmail.com", "12-08-2008", "ES6621000418401234567893", "BEG"],
-            ["43121297T", "Gustavo", "Per Tot", "682434345", "gpertot@gmail.com", "14-04-1990", "ES6621000418401234567894", "PRO"],
-            ["43121297U", "Alex", "Fernandez", "682434349", "afernandez@gmail.com", "14-01-2007", "ES6621000418401234567895", "BEG"]
+            ["43121297F", "Bufalobil", "Perez Gomez", "682454545", "jperez@gmail.com", "12-12-1980", "PRO"],
+            ["43121297D", "Kiko", "Sastre Peña", "682434343", "ksastre@gmail.com", "14-12-1990", "PRO"],
+            ["43121297R", "Miguel", "Cañellas", "682434344", "mcañellas@gmail.com", "12-08-2008", "BEG"],
+            ["43121297T", "Gustavo", "Per Tot", "682434345", "gpertot@gmail.com", "14-04-1990","PRO"],
+            ["43121297U", "Alex", "Fernandez", "682434349", "afernandez@gmail.com", "14-01-2007", "BEG"]
         ];
 
         function isValidPlayer(pMinAnys){
@@ -28,7 +29,7 @@
             pContenedor.innerHTML = "<h3>Lista de jugadores</h3>";
             for (let i = 0; i < pJugadores.length; i++) {
                 let jugador = pJugadores[i];
-                if (pTipo == jugador[7]) {
+                if (pTipo == jugador[6]) {
                     pContenedor.innerHTML += "<p>" + jugador[0] + "//" + jugador[1] + "<span>" + "" + jugador[2] + "</span>" + "//" + jugador[3] + " //" + jugador[4] + " //" + jugador[5] + " //" + jugador[6] + "//" + jugador[7] + "</p>";
                 }
             }
@@ -40,7 +41,8 @@
             let test_apellidos = document.getElementById("apellidos");
             let test_telefono = document.getElementById("telefono");
             let test_fecha = document.getElementById("fecha");
-            alert(test_dni);
+            //alert(test_dni);
+
 
            let txtTel=test_telefono.value;
            //let txtDate=test_telefono.value;
@@ -54,7 +56,7 @@
                 players.push([test_dni.value, test_nombre.value, test_apellidos.value, "", "", "", "BEG"]);
                 let containerPlayers = document.getElementById("c_players");
                 createListPlayers(players, containerPlayers, "BEG");
-                alert("Datos insertados correctamente")
+                //alert("Datos insertados correctamente")
                 //añadir al array(nuevo jugador)
             } else {
                 alert("Todos los campos son obligatorios");
@@ -66,7 +68,7 @@
 
         window.onload = function () {
 
-            alert("Cargado Correctamente");
+            //alert("Cargado Correctamente");
 
             let containerPlayers = document.getElementById("c_players");
 
@@ -80,8 +82,10 @@
 
     </script>
 </head>
-<body>
-<form class="" action="index.html" method="post">
+<body class="container">
+<div class="logoimg">
+<form class="" action="" method="post">
+    <div class="fields">
     <p>
         <label>DNI:</label>
         <input type="text" id="dni" name="dni"  value="">
@@ -103,8 +107,10 @@
         <input type="text" id="fecha" name="fecha"  value="">
     </p>
     <button type="button" id="bt-enviar" name="button" onclick="checkForm()">Añadir Jugador</button>
+    </div>
 </form>
 <div id="c_players"></div>
 <div id="c_players_pro"></div>
+</div>
 </body>
 </html>
