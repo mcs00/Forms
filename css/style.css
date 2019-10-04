@@ -8,5 +8,33 @@
   border-radius: 3px;
 }
 .logoimg{
+    width: 266px;
+    height: 465px;
+    top: 50%;
+    left: 50%;
+    margin-left: 315px;
+    margin-top: -163px;
+}
 
+input[type=text] {
+    /* border: 1px dotted #999; */
+    border-radius: 8px;
+    -webkit-appearance: textarea;
+}
+button {
+    font: 700 1em Tahoma, Arial, Verdana, sans-serif;
+    color: black; background-color: lightgrey;
+    border: 1px solid #0074a5;
+    border-top: 1px solid #004370;
+    border-left: 1px solid #004370;
+    cursor: pointer;
+}
+
+.scale1{
+    margin-left: 285px;
+    margin-top: -77px;
+}
+.scale3{
+    margin-left: 587px;
+    margin-top: -74px;
 }

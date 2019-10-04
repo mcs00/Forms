@@ -9,28 +9,30 @@
     <script type="text/javascript">
 
         let players = [
-            ["43121297F", "Bufalobil", "Perez Gomez", "682454545", "jperez@gmail.com", "12-12-1980", "PRO"],
-            ["43121297D", "Kiko", "Sastre Peña", "682434343", "ksastre@gmail.com", "14-12-1990", "PRO"],
+            ["43121297F", "Andrea", "Perez Gomez", "682454545", "aperez@gmail.com", "12-12-1980", "PRO"],
+            ["43121297D", "Pedro", "Sastre Peña", "682434343", "psastre@gmail.com", "14-12-1990", "PRO"],
             ["43121297R", "Miguel", "Cañellas", "682434344", "mcañellas@gmail.com", "12-08-2008", "BEG"],
-            ["43121297T", "Gustavo", "Per Tot", "682434345", "gpertot@gmail.com", "14-04-1990","PRO"],
+            ["43121297T", "Gustavo", "Per Tot", "682434345", "gpertot@gmail.com", "14-04-1990", "PRO"],
             ["43121297U", "Alex", "Fernandez", "682434349", "afernandez@gmail.com", "14-01-2007", "BEG"]
         ];
 
-        function isValidPlayer(pMinAnys){
-            let dataNai = document.getElementById(fecha);
+        function isValidPlayer(pMinAnys) {
+            let dataNai = document.getElementById("test_fecha").value;
             let aDate = dataNai.split("/"); //array dia mes año
-            let bornDate = new Date(aDate[2], aDate[1]-1, aDate[0]);
+            let bornDate = new Date(aDate[2], aDate[1] - 1, aDate[0]);
             let currentDate = new Date();
             let age = diffAnys(currentDate, bornDate);
-            return (age>=pMinAnys);
+            return (age >= pMinAnys);
         }
+
+
         function createListPlayers(pJugadores, pContenedor, pTipo) {
 
-            pContenedor.innerHTML = "<h3>Lista de jugadores</h3>";
+            pContenedor.innerHTML = "<h3>Jugadores Inscritos</h3>";
             for (let i = 0; i < pJugadores.length; i++) {
                 let jugador = pJugadores[i];
                 if (pTipo == jugador[6]) {
-                    pContenedor.innerHTML += "<p>" + jugador[0] + "//" + jugador[1] + "<span>" + "" + jugador[2] + "</span>" + "//" + jugador[3] + " //" + jugador[4] + " //" + jugador[5] + " //" + jugador[6] + "//" + jugador[7] + "</p>";
+                    pContenedor.innerHTML += "<img src='img/usuario.png'> " + jugador[0] + "--" + jugador[1] + "<span>" + "" + jugador[2] + "</span>" + "--" + jugador[3] + "--" + jugador[4] + "--" + jugador[5] + "--" + jugador[6] + "--" + jugador[7] + "</p>";
                 }
             }
         }
@@ -40,15 +42,19 @@
             let test_nombre = document.getElementById("nombre");
             let test_apellidos = document.getElementById("apellidos");
             let test_telefono = document.getElementById("telefono");
+            let test_correo = document.getElementById("correo");
+            let test_player = document.getElementById("tplayer");
             let test_fecha = document.getElementById("fecha");
+            let txtData = test_fecha.value;
+            let txtTel = test_telefono.value;
             //alert(test_dni);
-
-
-           let txtTel=test_telefono.value;
-           //let txtDate=test_telefono.value;
-
-            if( !validaTelefon(txtTel) || txtTel==""){
-                alert("Telefono incorrecto");
+            //Validaciones
+            if (!validaData(txtData) || txtData == "") {
+                alert("La fecha introducida no es correcta");
+                return false;
+            }
+            if (!validaTelefon(txtTel) || txtTel == "") {
+                alert("El telefono introducido no es correcto");
                 return false;
             }
 
@@ -61,9 +67,23 @@
             } else {
                 alert("Todos los campos son obligatorios");
             }
+            if (test_nombre.value != "" && test_apellidos.value != "" && test_dni.value != "") {
+
+                if (test_player.value == "Begginer") {
+                    players.push([test_dni.value, test_nombre.value, test_apellidos.value, test_telefono.value, test_correo.value, test_fecha.value, "Begginer"]);
+                    let containerPlayers = document.getElementById("c_players");
+
+                    createListPlayers(players, containerPlayers, "Begginer");
+
+                } else {
+                    players.push([test_dni.value, test_nombre.value, test_apellidos.value, test_telefono.value, test_correo.value, test_fecha.value, "Profesional"]);
+                    let containerPlayersPr = document.getElementById("c_players_pro");
+
+                    createListPlayers(players, containerPlayersPr, "Professional");
+                }
+            }
 
         }
-
 
 
         window.onload = function () {
@@ -84,33 +104,63 @@
 </head>
 <body class="container">
 <div class="logoimg">
+    <a href="#"><img src="img/sports.png"></a>
+</div>
 <form class="" action="" method="post">
     <div class="fields">
-    <p>
-        <label>DNI:</label>
-        <input type="text" id="dni" name="dni"  value="">
-    </p>
-    <p>
-        <label>Nombre:</label>
-        <input type="text" id="nombre" name="nombre" value="">
-    </p>
-    <p>
-        <label>Apellidos:</label>
-        <input type="text" id="apellidos" name="apellidos" value="">
-    </p>
-    <p>
-        <label>Telefono:</label>
-        <input type="text" id="telefono" name="telefono" value="">
-    </p>
-    <p>
-        <label>Fecha:</label>
-        <input type="text" id="fecha" name="fecha"  value="">
-    </p>
-    <button type="button" id="bt-enviar" name="button" onclick="checkForm()">Añadir Jugador</button>
+        <div class="scale">
+            <p>
+                <img src="img/identidad.png">
+                <label>DNI:</label>
+                <input type="text" id="dni" name="dni" value="" tabindex="7">
+            </p>
+            <p>
+                <img src="img/nombre.png">
+                <label>Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="">
+            </p>
+        </div>
+        <div class="scale1">
+            <p>
+                <img src="img/nombre.png">
+                <label>Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" value="">
+            </p>
+
+            <p>
+                <img src="img/llamada.png">
+                <label>Telefono:</label>
+                <input type="text" id="telefono" name="telefono" value="">
+            </p>
+        </div>
+        <div class="scale3">
+            <p>
+                <img src="img/calendario.png">
+                <label>Fecha:</label>
+                <input type="text" id="fecha" name="fecha" value="">
+            </p>
+            <p>
+                <img src="img/calendario.png">
+                <label>Correo:</label>
+                <input type="text" id="correo" name="correo" value="">
+            </p>
+        </div>
+        <p>
+            <label>Tipo de jugador</label>
+            <select name="tplayer" id="tplayer">
+                <option id="Begginer" value="Begginer">Principiante</option>
+                <option id="Professional" value="Professional">Profesional</option>
+            </select>
+        </p>
+
+        <button type="button" id="bt-enviar" name="button" class="button" onclick="checkForm()"><img src="img/send.png">Añadir
+            Jugador
+        </button>
     </div>
 </form>
-<div id="c_players"></div>
-<div id="c_players_pro"></div>
+<div class="fields">
+    <div id="c_players" class=""></div>
+    <div id="c_players_pro"></div>
 </div>
 </body>
 </html>
